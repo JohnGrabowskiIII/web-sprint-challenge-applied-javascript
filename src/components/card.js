@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,7 +19,34 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+  // console.log('in function');
+  let divCard = document.createElement('div');
+  divCard.classList.add('card');
+  let divHeadline = document.createElement('div');
+  divHeadline.classList.add('headline');
+  divHeadline.textContent = `${article.headline}`;
+  divCard.appendChild(divHeadline);
+  let divAuthor = document.createElement('div');
+  divAuthor.classList.add('author');
+  divCard.appendChild(divAuthor);
+  let imgContain = document.createElement('div');
+  imgContain.classList.add('img-container');
+  divAuthor.appendChild(imgContain);
+  let img = document.createElement('img');
+  img.src = `${article.authorPhoto}`;
+  imgContain.appendChild(img);
+  let spanAuthor = document.createElement('span');
+  spanAuthor.textContent = `By ${article.authorName}`;
+  divAuthor.appendChild(spanAuthor);
+  // console.log(divCard);
+  return divCard;
 }
+
+// Card({
+//   'headline': headline,
+//   'authorPhoto': authorPhoto,
+//   'authorName': authorName
+// })
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -28,6 +57,37 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+  let selectObj = document.querySelector(`${selector}`);
+  console.log(selectObj);
+  axios.get('https://lambda-times-api.herokuapp.com/articles')
+    .then(eOne => {
+      console.log(eOne);
+      let articleGroup = eOne.data.articles;
+      console.log(articleGroup);
+      // I TRIED TO MAKE AN ARRAY OF ARTICLE TITLES, AND LOOP THROUGH THAT TO CREATE EACH ARTICLE CARD
+      // I UNDERSTAND THIS METHOD IS DRY BUT WAS NOT ABLE TO WORK THROUGH ORIGINAL IDEA
+      articleGroup.javascript.forEach(eJS => {
+        let cardItem = Card(eJS);
+        selectObj.appendChild(cardItem);
+      })
+      articleGroup.bootstrap.forEach(eBoot => {
+        let cardItem = Card(eBoot);
+        selectObj.appendChild(cardItem);
+      })
+      articleGroup.technology.forEach(eTech => {
+        let cardItem = Card(eTech);
+        selectObj.appendChild(cardItem);
+      })
+      articleGroup.jquery.forEach(eJQ => {
+        let cardItem = Card(eJQ);
+        selectObj.appendChild(cardItem);
+      })
+      articleGroup.node.forEach(eNode => {
+        let cardItem = Card(eNode);
+        selectObj.appendChild(cardItem);
+      })
+    });
 }
 
 export { Card, cardAppender }
+

@@ -41,7 +41,7 @@ const headerAppender = (selector) => {
   let selectObj = document.querySelector(`${selector}`);
   // console.log(selectObj);
   selectObj.appendChild(headObj);
-  console.log(headObj);
+  // console.log(headObj);
 }
 
 // headerAppender();

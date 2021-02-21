@@ -24,10 +24,8 @@ const Tabs = (topics) => {
     divTopics.appendChild(divEvent);
   });
   return divTopics
-  // console.log(divTopics);
 }
 
-// Tabs(['item1', 'item2']);
 
 const tabsAppender = (selector) => {
   // TASK 4

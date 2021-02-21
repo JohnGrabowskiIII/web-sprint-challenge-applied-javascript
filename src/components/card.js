@@ -19,7 +19,6 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
-  // console.log('in function');
   let divCard = document.createElement('div');
   divCard.classList.add('card');
   let divHeadline = document.createElement('div');
@@ -38,15 +37,11 @@ const Card = (article) => {
   let spanAuthor = document.createElement('span');
   spanAuthor.textContent = `By ${article.authorName}`;
   divAuthor.appendChild(spanAuthor);
-  // console.log(divCard);
+  divCard.addEventListener('click', e => {
+    console.log(article.headline);
+  })
   return divCard;
 }
-
-// Card({
-//   'headline': headline,
-//   'authorPhoto': authorPhoto,
-//   'authorName': authorName
-// })
 
 const cardAppender = (selector) => {
   // TASK 6
@@ -58,12 +53,9 @@ const cardAppender = (selector) => {
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
   let selectObj = document.querySelector(`${selector}`);
-  console.log(selectObj);
   axios.get('https://lambda-times-api.herokuapp.com/articles')
     .then(eOne => {
-      console.log(eOne);
       let articleGroup = eOne.data.articles;
-      console.log(articleGroup);
       // I TRIED TO MAKE AN ARRAY OF ARTICLE TITLES, AND LOOP THROUGH THAT TO CREATE EACH ARTICLE CARD
       // I UNDERSTAND THIS METHOD IS DRY BUT WAS NOT ABLE TO WORK THROUGH ORIGINAL IDEA
       articleGroup.javascript.forEach(eJS => {

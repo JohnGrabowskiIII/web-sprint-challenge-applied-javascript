@@ -25,7 +25,6 @@ const Header = (title, date, temp) => {
   spanTemp.textContent = `${temp}`;
   divHead.appendChild(spanTemp);
   return divHead;
-  // console.log(divHead);
 }
 
 Header('title', 'date', 'temp');
@@ -39,11 +38,7 @@ const headerAppender = (selector) => {
   //
   let headObj = Header('title', 'date', 'temp');
   let selectObj = document.querySelector(`${selector}`);
-  // console.log(selectObj);
   selectObj.appendChild(headObj);
-  // console.log(headObj);
 }
-
-// headerAppender();
 
 export { Header, headerAppender }
